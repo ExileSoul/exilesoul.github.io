@@ -5,16 +5,31 @@
  */
 
 // Plugins
-import { registerPlugins } from '@/plugins'
+import { registerPlugins } from '@/plugins';
 
 // Components
-import App from './App.vue'
+import { createI18n } from 'vue-i18n';
+import App from './App.vue';
+
+import en from '@/locales/en.json';
+import fr from '@/locales/fr.json';
+
+const i18n = createI18n({
+    locale: 'en', // default locale
+    fallbackLocale: 'en', // fallback locale if the current locale is missing
+    messages: {
+        en,
+        fr,
+    },
+});
 
 // Composables
-import { createApp } from 'vue'
+import { createApp } from 'vue';
 
-const app = createApp(App)
+const app = createApp(App);
 
-registerPlugins(app)
+registerPlugins(app);
 
-app.mount('#app')
+app.use(i18n);
+
+app.mount('#app');
